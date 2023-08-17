@@ -1,0 +1,48 @@
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+    id 'kotlin-parcelize'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+}
+
+apply from: '../shared_dependencies.gradle'
+
+android {
+    compileSdk 32
+
+    defaultConfig {
+        minSdk 28
+        targetSdk 32
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField("String", "API_KEY", '"e631dbab50c8a96a2e570344aaf629ae"')
+        consumerProguardFiles "consumer-rules.pro"
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    buildFeatures {
+        viewBinding true
+    }
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
+    //Database Encryption
+    implementation "net.zetetic:android-database-sqlcipher:$sqlcipher_version"
+    implementation "androidx.sqlite:sqlite-ktx:$sqlite_ktx_version"
+}

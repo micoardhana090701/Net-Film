@@ -1,0 +1,37 @@
+plugins {
+    id 'com.android.dynamic-feature'
+    id 'kotlin-android'
+    id 'kotlin-parcelize'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+}
+
+apply from: '../shared_dependencies.gradle'
+
+android {
+    compileSdk 32
+
+    defaultConfig {
+        minSdk 28
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField("String", "API_KEY", '"e631dbab50c8a96a2e570344aaf629ae"')
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    buildFeatures {
+        viewBinding true
+    }
+}
+dependencies {
+    implementation project(":core")
+    implementation project(":app")
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.5.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+}
